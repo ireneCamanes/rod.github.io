@@ -1,0 +1,703 @@
+
+
+body {
+  font-family: "PP Mori";
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-color: #E5E5E5;
+  min-width: 320px; /* Ensure the window can't be narrower than this */
+}
+main {
+  flex: 1;
+  padding-bottom: 2rem;  /* Add padding at the bottom to avoid overlap */
+}
+footer {
+  background-color: #000;
+  color: white;
+  padding: 1rem;
+  margin-top: auto;  /* Push footer to the bottom */
+  z-index: 10;      /* Ensure footer is above other elements */
+}
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 82px;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  user-select: none;
+}
+
+.header-list-item {
+  list-style: none;
+  padding: 0;
+  background-color: #fafafa;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.header-list-item li {
+  cursor: pointer;
+  background-color: #fafafa;
+  margin-bottom: 0;
+}
+
+.header-list-item li span {
+  color: #1e1e1c;
+  font-family: "PP Mori-ExtraLight", "PP Mori", sans-serif;
+  font-size: 20px;
+  background-color: #fafafa;
+  font-weight: 100;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.header-list-item li.active span {
+  color: #1e1e1c;
+  font-family: "PP Mori-SemiBold", "PP Mori", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 0;
+  text-decoration: underline;
+}
+
+.nav::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #000;
+}
+
+.hi {
+  height: 30rem;
+  max-height: 800px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  position: relative;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 0;
+}
+
+.hi h1 {
+  font-size: 5vw;
+  text-align: left;
+  font-weight: 100;
+  line-height: 1.2;
+  margin-left: 4vw;
+  margin-right: 4vw;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis to overflow text */
+}
+
+
+.text-container {
+  position: relative;
+  width: fit-content;
+}
+
+.text-container p {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.5;
+}
+
+.highlight {
+  position: relative;
+  z-index: 2;
+}
+
+#drawingCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.hi {
+  position: relative;
+  cursor: none; /* Hide the default cursor */
+}
+
+.cursor {
+  position: absolute;
+  width: 40px; /* Adjust the size of the circular cursor */
+  height: 40px; /* Adjust the size of the circular cursor */
+  border-radius: 50%; /* Make the cursor circular */
+  background-color: #E8FF5D; /* Set the color of the cursor */
+  pointer-events: none; /* Ensure the cursor doesn't interfere with pointer events on underlying elements */
+  display: none; /* Initially hide the cursor */
+}
+
+.section-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 2px solid #000;
+}
+
+.divider {
+  margin: 0;
+  width: 100%;
+  border-top: 2px solid #000;
+  justify-content: center;
+}
+
+p {
+  font-size: 20px;
+  text-align: left;
+  margin-left: 4vw;
+  margin-right: 4vw;
+  font-weight: 100;
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+  background-color: #1e1e1c;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+h3 {
+  font-size: min(max(15px, 4vw), 25px);
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 0.1px;
+  white-space: nowrap;
+}
+
+h4 {
+  font-size: min(max(15px, 2vw), 25px);
+  font-weight: 100;
+  line-height: 135%;
+  text-align: left;
+  color: #fff;
+}
+
+@keyframes fallIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fallOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+#about {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#word-container {
+  position: relative;
+  width: 150px; /* Set a fixed width for the container */
+  display: inline-block;
+}
+
+#changing-word {
+  display: inline-block;
+  text-align: center;
+}
+
+.line {
+  position: absolute;
+  bottom: -2px; /* Adjust this value to position the line where you want it */
+  left: 50%; /* Center the line horizontally within the container */
+  transform: translateX(-20%); /* Move the line back by half of its own width */
+  width: 100%; /* Ensure the line spans the entire width of the container */
+  height: 2px; /* Adjust this value to change the thickness of the line */
+  background-color: white;
+}
+
+.fall-in {
+  animation: fallIn 0.5s ease-in-out forwards;
+}
+
+.fall-out {
+  animation: fallOut 0.5s ease-in-out forwards;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+  background-color: #E5E5E5; /* Same background color as hi section */
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.about-content {
+  background-color: #1e1e1c; /* Background color for the sentence "I strive" */
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0; /* Add padding for better spacing */
+}
+
+.biography {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.bio-content {
+  display: flex;
+  flex-direction: column; /* Change to column to stack bio text and picture vertically */
+  align-items: center;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.bio-left {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.bio-text {
+  padding: 1rem 4vw;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.bio-picture {
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  text-align: center; /* Center the picture */
+}
+
+.bio-picture img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.values-graphic {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.full-width {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.arrow-diagonal {
+  width: 3%;
+  height: 3%;
+}
+
+.bottom-section {
+  background-color: #1e1e1c; /* Your desired background color */
+  color: white; /* Ensuring the text is visible against the new background */
+  padding: 2rem 4vw; /* Add some padding for better spacing */
+}
+
+/* Ensure other elements within the bottom section inherit the color and font styles */
+.bottom-section .contact .frame-15 .cama-es-irene-gmail-com,
+.bottom-section .linkedin,
+.bottom-section .behance {
+  color: white;
+}
+
+.contact {
+  margin-top: 2rem;
+}
+
+.contact .frame-15 {
+  display: flex;
+  flex-grow: 1;
+}
+
+.contact .frame-15 .cama-es-irene-gmail-com {
+  color: white;
+  margin-left: 2%;
+  white-space: nowrap;
+}
+
+.cama-es-irene-gmail-com {
+  margin-left: -50px;
+  font-size: 2.8vw;
+  font-size: max(25px, 2vw);
+}
+
+.hover-link {
+  color: white;
+  text-decoration: none;
+  transition: font-size 0.3s;
+}
+
+.hover-link:hover {
+  font-size: 2.1vw;
+}
+
+.line-7 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 33%;
+  max-width: 500px;
+  height: 2px;
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 5%;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  text-justify: left;
+}
+
+.link {
+  margin-top: 0.5rem;
+}
+
+.linkedin,
+.behance {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.linkedin:hover,
+.behance:hover {
+  text-decoration: underline;
+}
+
+.bio-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items */
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.bio-left {
+  width: 80%; /* Adjust the width as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.bio-text {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.bio-picture {
+  width: 50%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.bio-content {
+  flex-direction: row;
+}
+
+.bio-left {
+  width: 50%;
+}
+
+.bio-picture {
+  width: 50%;
+}
+
+.about-gif {
+  flex: 1; 
+  transform: rotate(-0.891deg);
+  box-sizing: border-box; 
+  }
+  .about-gif img {
+  max-width: 60%;
+  max-height: 100%;
+  margin-left: 4vw;
+  margin-right: 4vw;
+  margin-top: 20px;
+  margin-bottom: -30px;
+  object-fit: contain;
+  width: 100%; 
+  height: auto; 
+  }
+  #container {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Adjust height as needed */
+  
+  }
+  
+  .picture {
+    width: 150px;
+    height: auto;
+    position: absolute;
+    cursor: grabbing;
+  }
+  
+  .picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+
+
+  #section3 {
+    display: flex;
+    justify-content: left;
+    gap: 20px; /* Optional: Adjust the gap between the columns */
+}
+
+#container2 {
+    max-width: 750px; /* Control the text column width */
+    justify-content: left;
+    padding-bottom: 5%;
+}
+
+#container2 p {
+    font-size: 16px; /* Adjust text size */
+    line-height: 1.5; /* Adjust line spacing */
+}
+
+#image-column {
+    display: flex;
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+}
+
+#image-column img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+model-viewer {
+  width: 850px;
+  height: 850px;
+  min-width: 250px;
+  min-height: 250px;
+}
+
+
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    margin: 0;
+    padding: 0;
+   
+  }
+
+  .hi {
+    height: 20rem;
+    margin: 0; /* Ensure there's no margin */
+    padding: 0; /* Ensure there's no padding */
+  }
+  
+  .header-list-item li span {
+    font-size: 16px;
+  }
+
+  .header-list-item li.active span {
+    font-size: 20px;
+  }
+
+  .hi h1 {
+    font-size: 6vw;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis to overflow text */
+  }
+
+  p {
+    font-size: 18px;
+  }
+
+  .about-content {
+    background-color: #1e1e1c; /* Background color for the sentence "I strive" */
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0; /* Add padding for better spacing */
+  }
+
+  .about-content h3 {
+    font-size: 0.8rem; /* Adjust font size for small screens */
+  }
+  .line {
+    width: 80%; /* Adjust the width for small screens */
+    height: 0.5px;
+    position: absolute;
+    bottom: -2px; /* Adjust this value to position the line where you want it */
+    left: 50%; /* Center the line horizontally within the container */
+    transform: translateX(-30%); /* Move the line back by half of its own width */
+  }
+
+  .bio-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bio-left, .bio-picture {
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  model-viewer {
+    width: 300px;
+    height: 300px;
+  }
+
+  .arrow-diagonal {
+    width: 15px;
+    height: 15px;
+  }
+
+  .contact {
+    margin-top: 2rem;
+    margin-left: 4vw;
+    margin-right: 4vw;
+  }
+
+  .contact .frame-15 {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .contact .frame-15 .cama-es-irene-gmail-com {
+    color: white;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+
+  .cama-es-irene-gmail-com {
+    margin-left: 10px;
+    font-size: 120%;
+  }
+
+  .hover-link:hover {
+    font-size: 100%;
+  }
+
+  .line-7 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 260px;
+    height: 2px;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .bio-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bio-left, .bio-picture, .values {
+    width: 100%;
+  }
+
+  .container {
+    width: 100%; /* Increase width for smaller screens */
+  }
+    
+  .values {
+    padding: 1rem 4vw;
+  }
+
+  .values-graphic {
+    flex-direction: column;
+  }
+
+  .picture {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    cursor: move;
+  }
+  #container2 p {
+    font-size: 12px; /* Adjust text size */
+    line-height: 1.5; /* Adjust line spacing */
+  }
+}
+
+
+@media (max-width: 1300px) {
+  #section3 {
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+    justify-content: flex-start; /* Align items from the top */
+    gap: 20px; 
+  }
+  model-viewer {
+    width: 50px;
+    height: 50px;
+  }
+}
